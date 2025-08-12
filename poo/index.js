@@ -5,12 +5,7 @@ class Encuesta {
         this.preguntaContestada = false;
     }
 
-
-
-    votar(respuestaUsuario){
-        this.preguntaContestada = true;
-    }
-
+    //Pemite ingresar preguntas y posibles respuestas de la encuesta
     pedirPreguntasYOpciones(){
         const numPreguntas = prompt("¿Cuantas preguntas desea ingresar para su encuesta?");
         const preguntas = [];
@@ -24,9 +19,10 @@ class Encuesta {
             }
             this.opciones.push(opciones);
         }
-        console.log(preguntas)
+        //console.log(preguntas)
     }
 
+    //Define lo que se muestra en la página
     mostrarEnPagina(contenedorId){
         const contenedor = document.getElementById(contenedorId);
         contenedor.innerHTML = ""; //Reinicia el contenido
@@ -57,7 +53,9 @@ class Encuesta {
         contenedor.append(boton);
     }
 
+    //Respuestas
     obtenerRespuestas(contenedorId){
+        //Obtenemos la selección por cada respuesta
         const respuestas = [];
         this.preguntas.forEach((pregunta,idx) => {
             const seleccionados = [];
