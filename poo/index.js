@@ -64,7 +64,7 @@ class Encuesta {
             const checkboxes = document.querySelectorAll(`input[name="opcion ${idx}"]:checked`);
             checkboxes.forEach(cb=> seleccionados.push(cb.value));
             respuestas.push({
-                pregunta: pregunta,
+                pregunta: pregunta[idx],
                 seleccionados: seleccionados
             });        
         });
@@ -77,6 +77,7 @@ class Encuesta {
             p.textContent = `${r.pregunta}: ${r.seleccionados.join(", ") || "Sin respuesta"}`;
             contenedor.append(p);
         });
+        console.log(respuestas);
     }
 }
 
