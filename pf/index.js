@@ -38,35 +38,32 @@ function pedirPreguntasYOpciones(contenedorId){
 
     const boton = document.createElement("button");
     boton.textContent = "Enviar respuestas";
-    //boton.onclick = () => this.obtenerRespuestas(contenedorId);
+    boton.onclick = () => obtenerRespuestas(contenedorId, preguntas);
     contenedor.append(boton);
 };
 
-/*     //Respuestas
-    obtenerRespuestas(contenedorId){
-        //Obtenemos la selección por cada respuesta
-        const respuestas = [];
-        this.preguntas.forEach((pregunta,idx) => {
-            const seleccionados = [];
-            const checkboxes = document.querySelectorAll(`input[name="opcion ${idx}"]:checked`);
-            checkboxes.forEach(cb=> seleccionados.push(cb.value));
-            respuestas.push({
-                pregunta: pregunta[idx],
-                seleccionados: seleccionados
-            });        
-        });
+function obtenerRespuestas(contenedorId, preguntas = []){
+    //Obtenemos la selección por cada respuesta
+    const respuestas = [];
 
-        //Mostrar resultados en la página
-        const contenedor = document.getElementById(contenedorId);
-        contenedor.innerHTML = "<h2>Resultados de la encuesta: </h2>";
-        respuestas.forEach(r => {
-            const p = document.createElement("p");
-            p.textContent = `${r.pregunta}: ${r.seleccionados.join(", ") || "Sin respuesta"}`;
-            contenedor.append(p);
+    preguntas.forEach((pregunta,idx) =>{
+        const seleccionados = [];
+        const checkboxes = document.querySelectorAll(`input[name="opcion ${idx}"]:checked`);
+        checkboxes.forEach(cb=> seleccionados.push(cb.value));
+        respuestas.push({
+            pregunta: pregunta,
+            seleccionados: seleccionados
         });
-        console.log(respuestas);
-    }  */
+    });
 
+    const contenedor = document.getElementById(contenedorId);
+    contenedor.innerHTML = "<h2>Resultados de la encuesta: </h2>";
+    respuestas.forEach(r => {
+        const p = document.createElement("p");
+        p.textContent = `${r.pregunta}: ${r.seleccionados.join(", ") || "Sin respuesta"}`;
+        contenedor.append(p);
+    });
+}
 
 // Ejemplo de uso:
 
