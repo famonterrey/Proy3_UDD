@@ -1,7 +1,5 @@
-
-
  //Pemite ingresar preguntas y posibles respuestas de la encuesta
-function pedirPreguntasYOpciones(){
+function pedirPreguntasYOpciones(contenedorId){
     const preguntas = [];
     const opciones = [];
     const numPreguntas = prompt("¿Cuantas preguntas desea ingresar para su encuesta?");
@@ -13,55 +11,38 @@ function pedirPreguntasYOpciones(){
                 opciones[i][j] = prompt("Ingrese la opción " + (j + 1) + " para la pregunta " + (i + 1));
             };
     };
-    return {preguntas, opciones};
-};
 
-//Define lo que se muestra en la página
-function mostrarEnPagina(contenedorId, preguntas = [], opciones = []){
     const contenedor = document.getElementById(contenedorId);
-    contenedor.innerHTML = ""; //Reinicia el contenido
+    //contenedor.innerHTML = ""; //Reinicia el contenido
 
-    preguntas.forEach((pregunta,idx) => {
+    preguntas.forEach((pregunta, idx) => {
         //Crear título para cada pregunta
         const titulo = document.createElement("h3");
-        titulo.textContent = pregunta[idx];
+        titulo.textContent = pregunta;
         contenedor.append(titulo);
+
+        opciones[idx].forEach(opcion => {
+        //Crear checkbox para cada opción
+        const label = document.createElement("label");
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.name = `opcion ${idx}`
+        checkbox.value = opcion;
+
+        label.append(checkbox);
+        label.append(document.createTextNode(opcion));
+        contenedor.append(label);
+        contenedor.append(document.createElement("br"));
+        });
     });
 
-}
+    const boton = document.createElement("button");
+    boton.textContent = "Enviar respuestas";
+    //boton.onclick = () => this.obtenerRespuestas(contenedorId);
+    contenedor.append(boton);
+};
 
-
-
-/*         const contenedor = document.getElementById(contenedorId);
-        contenedor.innerHTML = ""; //Reinicia el contenido
-
-        this.preguntas.forEach((pregunta,idx) => {
-            //Crea título para las preguntas
-            const titulo = document.createElement("h3");
-            titulo.textContent = pregunta[idx];
-            contenedor.append(titulo);
-
-            this.opciones[idx].forEach((opcion, i) => {
-                const label = document.createElement("label");
-                const checkbox = document.createElement("input");
-                checkbox.type = "checkbox";
-                checkbox.name = `opcion ${idx}`;
-                checkbox.value = opcion;
-
-                label.append(checkbox);
-                label.append(document.createTextNode(opcion));
-                contenedor.append(label);
-                contenedor.append(document.createElement("br")); //genera salto entre opciones
-            });
-        });
-
-        const boton = document.createElement("button");
-        boton.textContent = "Enviar respuestas";
-        boton.onclick = () => this.obtenerRespuestas(contenedorId);
-        contenedor.append(boton);
-    
-
-    //Respuestas
+/*     //Respuestas
     obtenerRespuestas(contenedorId){
         //Obtenemos la selección por cada respuesta
         const respuestas = [];
@@ -84,9 +65,12 @@ function mostrarEnPagina(contenedorId, preguntas = [], opciones = []){
             contenedor.append(p);
         });
         console.log(respuestas);
-    } */
+    }  */
 
 
 // Ejemplo de uso:
 
-console.log(pedirPreguntasYOpciones());
+//console.log(pedirPreguntasYOpciones());
+window.onload = function() {
+    pedirPreguntasYOpciones("encuesta-container");
+};
