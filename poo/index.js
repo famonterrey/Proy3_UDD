@@ -33,7 +33,7 @@ class Encuesta {
             titulo.textContent = pregunta[idx];
             contenedor.append(titulo);
 
-            this.opciones[idx].forEach((opcion, i) => {
+            this.opciones[idx].forEach(opcion => {
                 const label = document.createElement("label");
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
